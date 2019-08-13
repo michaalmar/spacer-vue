@@ -5,18 +5,16 @@
       <form v-on:submit.prevent="getResult(searchValue)">
         <input id="search" name="search" v-model="searchValue" />
       </form>
-
-      <ul>
-        <li v-for="item in results" :key="item.data[0].nasa_id">
-          <p>{{item.data[0].description}}</p>
-        </li>
-      </ul>
-    </div>
+          </div>
+      <div class="results">
+        <Item v-for="item in results" :item="item" :key="item.data[0].nasa_id" />
+      </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import Item from "../components/Item"
 
 export default {
   name: "Home",
@@ -25,6 +23,10 @@ export default {
       searchValue: "",
       results: []
     };
+  },
+  components:
+  {
+    Item,
   },
   methods: {
     getResult(searchValue) {
@@ -67,4 +69,8 @@ export default {
     font-size: 20px;
   }
 }
+.results{
+  margin-top: 50px;
+}
+
 </style>
